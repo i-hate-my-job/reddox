@@ -48,33 +48,9 @@ public class ArgumentFlexibleComponent extends Argument<Component> {
 
     @Override
     public String parser() {
-        return "WHAT HAPPENED";
+        // using minecraft:function is a namespace that doesn't break anything
+        // and still allows auto-complete to work fine, no errors seem to occur with this
+        // so eh, it's good enough.
+        return "minecraft:function";
     }
-
-//    @Override
-//    public @NotNull Component parse(@NotNull CommandSender sender, @NotNull String input) throws ArgumentSyntaxException {
-//        try {
-//            // Verify if the input is valid json
-//            final JsonReader reader = new JsonReader(new StringReader(input));
-//            return GsonComponentSerializer.gson().serializer().getAdapter(Component.class).read(reader);
-//        } catch (Exception e) {
-//            if (!infinite) {
-//                // Input needs to be quoted
-//                input = Argument.parse(sender, new ArgumentString(input));
-//            }
-//            // Otherwise, parse with MiniMessage
-//            // PATCH: use deserialize instead
-//            return MINI_MESSAGE.deserialize(input);
-//        }
-//    }
-//
-//    @Override
-//    public void processNodes(@NotNull NodeMaker nodeMaker, boolean executable) {
-//        DeclareCommandsPacket.Node stringNode = simpleArgumentNode(this, executable, false, false);
-//        stringNode.parser = "brigadier:string";
-//        stringNode.properties = BinaryWriter.makeArray(binaryWriter ->
-//                binaryWriter.writeVarInt(infinite ? 2 : 1)); // Greedy or quotable depending on the type
-//
-//        nodeMaker.addNodes(new DeclareCommandsPacket.Node[]{stringNode});
-//    }
 }

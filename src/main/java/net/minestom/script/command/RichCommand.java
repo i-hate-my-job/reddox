@@ -9,6 +9,7 @@ import net.minestom.server.entity.Player;
 import net.minestom.server.instance.Instance;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.StringReader;
 import java.util.function.Consumer;
 
 /**
@@ -54,5 +55,4 @@ public class RichCommand extends Command {
         var instances = ScriptManager.getInstanceSupplier().apply(sender);
         instances.forEach(consumer);
     }
-
 }
