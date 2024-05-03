@@ -26,13 +26,13 @@ dependencies {
     // implemeneting this in the consumer will completely override the minestom version
     // being used.
     // Running on https://github.com/Minestom/Minestom/commit/fed512eaf6f855cd890ca91903cb77976dd4ab64
-    compileOnly 'com.github.Minestom:Minestom:fed512eaf6'
+    compileOnly 'com.github.Minestom:Minestom:fed512eaf6f855cd890ca91903cb77976dd4ab64'
 
     // https://mvnrepository.com/artifact/org.apache.commons/commons-text
-    implementation group: 'org.apache.commons', name: 'commons-text', version: '1.9'
+    implementation group: 'org.apache.commons', name: 'commons-text', version: '1.12.0'
 
     // https://mvnrepository.com/artifact/org.eclipse.dirigible/dirigible-engine-javascript-graalvm
-    implementation group: 'org.eclipse.dirigible', name: 'dirigible-engine-javascript-graalvm', version: '5.8.0'
+    implementation group: 'org.eclipse.dirigible', name: 'dirigible-engine-javascript-graalvm', version: '6.3.16.5'
 
     implementation "net.kyori:adventure-text-minimessage:4.16.0"
 }
@@ -42,8 +42,20 @@ test {
 }
 
 java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+tasks {
+    compileJava {
+        options.compilerArgs.addAll(List.of(
+                "--release",
+                "21"
+        ));
     }
 }
 
