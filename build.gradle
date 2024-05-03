@@ -53,3 +53,15 @@ java {
         languageVersion = JavaLanguageVersion.of(21)
     }
 }
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'net.minestom'
+            artifactId = 'scripts'
+            version = '1.0-SNAPSHOT'
+
+            from components.java
+        }
+    }
+}
