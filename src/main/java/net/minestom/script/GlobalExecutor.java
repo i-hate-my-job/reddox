@@ -71,7 +71,7 @@ public class GlobalExecutor implements Executor {
         final PlayerProperty playerProperty = playerValue.asProxyObject();
 
         final UUID uuid = UUID.fromString(((Value) playerProperty.getMember("uuid")).asString());
-        final Player player = MinecraftServer.getConnectionManager().getPlayer(uuid);
+        final Player player = MinecraftServer.getConnectionManager().getOnlinePlayerByUuid(uuid);
         if (player == null)
             return null;
 

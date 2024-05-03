@@ -5,6 +5,7 @@ import net.minestom.script.ScriptManager;
 import net.minestom.script.component.ScriptAPI;
 import net.minestom.server.command.CommandSender;
 import net.minestom.server.command.builder.Command;
+import net.minestom.server.entity.Player;
 import net.minestom.server.instance.Instance;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,12 +24,13 @@ public class RichCommand extends Command {
         this.category = category;
 
         setCondition((source, commandString) -> {
-            if (!source.isPlayer()) {
-                // Permission for server and console
-                return true;
-            }
             // Permission depending on the end application
-            return ScriptManager.getCommandPermission().apply(source.asPlayer());
+            if(source instanceof Player player) {
+                return ScriptManager.getCommandPermission().apply(player);
+            }
+
+            // Permission for server and console
+            return true;
         });
 
         setDefaultExecutor((sender, context) ->

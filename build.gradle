@@ -1,18 +1,19 @@
 plugins {
     id 'java'
-    id 'com.github.johnrengelman.shadow' version '6.1.0'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
-group 'org.example'
+group 'net.minestom'
 version '1.0-SNAPSHOT'
 
 repositories {
+    mavenCentral()
+
     maven {
         name = "sonatype-oss-snapshots"
         url = "https://oss.sonatype.org/content/repositories/snapshots/"
     }
 
-    mavenCentral()
     maven { url 'https://repo.spongepowered.org/maven' }
     maven { url 'https://jitpack.io' }
 }
@@ -21,7 +22,11 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 
-    implementation 'com.github.Minestom:Minestom:bf3ce1dfb0306e50ad563a2df6853a7a2f4c3588'
+    // PATCH: Implement this in consumer and use that Minestom impl otherwise
+    // implemeneting this in the consumer will completely override the minestom version
+    // being used.
+    // Running on https://github.com/Minestom/Minestom/commit/fed512eaf6f855cd890ca91903cb77976dd4ab64
+    compileOnly 'com.github.Minestom:Minestom:fed512eaf6'
 
     // https://mvnrepository.com/artifact/org.apache.commons/commons-text
     implementation group: 'org.apache.commons', name: 'commons-text', version: '1.9'
@@ -36,6 +41,12 @@ test {
     useJUnitPlatform()
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
 shadowJar {
-    archiveName("reddox.jar")
+    setArchiveFileName("reddox.jar")
 }

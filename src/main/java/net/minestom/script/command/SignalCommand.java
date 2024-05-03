@@ -25,7 +25,7 @@ public class SignalCommand extends RichCommand {
 
         final var propertiesArgument = Loop("properties",
                 Group("properties_group", Word("key"), NBT("value")))
-                .setDefaultValue(ArrayList::new);
+                .setDefaultValue(new ArrayList<>());
 
         addSyntax((sender, context) -> {
             final String name = context.get("name");

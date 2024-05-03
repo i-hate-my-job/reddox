@@ -29,7 +29,7 @@ public class RegionCommand extends RichCommand {
                 Group("1", Literal("position_start"), RelativeVec3("pos1")),
                 Group("2", Literal("position_end"), RelativeVec3("pos2")),
                 Group("3", Literal("data"), NbtCompound("region_data")))
-                .setDefaultValue(ArrayList::new);
+                .setDefaultValue(new ArrayList<>());
 
         addSyntax((sender, context) -> {
             final String identifier = context.get("identifier");
@@ -46,7 +46,7 @@ public class RegionCommand extends RichCommand {
                 sender.sendMessage(Component.text("Region '" + identifier + "' already exists!"));
             }
             context.setReturnData(new CommandData().set("success", success));
-        }, Literal("create"), Word("identifier"), RelativeVec3("pos1"), RelativeVec3("pos2"), NbtCompound("region_data").setDefaultValue(NBTCompound::new));
+        }, Literal("create"), Word("identifier"), RelativeVec3("pos1"), RelativeVec3("pos2"), NbtCompound("region_data").setDefaultValue(new NBTCompound()));
 
         addSyntax((sender, context) -> {
             final String identifier = context.get("identifier");
